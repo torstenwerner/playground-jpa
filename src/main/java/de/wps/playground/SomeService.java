@@ -18,13 +18,13 @@ public class SomeService {
     @Autowired
     private RelatedRepository relatedRepository;
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional
     public SomeEntity createEntity() {
         final SomeEntity entity = new SomeEntity();
         return someRepository.save(entity);
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional
     public SomeEntity failTransaction() {
         final SomeEntity entity = new SomeEntity();
         someRepository.save(entity);
@@ -33,12 +33,12 @@ public class SomeService {
         return entity;
     }
 
-    @Transactional(readOnly = true, timeout = 5)
+    @Transactional(readOnly = true)
     public SomeEntity getById(long id) {
         return someRepository.findOne(id);
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional
     public RelatedEntity createRelated(String field) {
         final SomeEntity someEntity = someRepository.save(new SomeEntity(field));
         return relatedRepository.save(new RelatedEntity(someEntity));

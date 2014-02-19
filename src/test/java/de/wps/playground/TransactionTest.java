@@ -3,6 +3,7 @@ package de.wps.playground;
 import org.junit.Test;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.hamcrest.Matchers.is;
@@ -15,8 +16,6 @@ import static org.junit.Assert.assertThat;
 @TransactionConfiguration(defaultRollback = true)
 public class TransactionTest extends AbstractTest {
     @Test
-    @Transactional(timeout = 5)
-    @Rollback
     public void testTransaction() throws Exception {
         assertThat(someRepository.count(), is(0L));
     }
@@ -31,8 +30,7 @@ public class TransactionTest extends AbstractTest {
     }
 
     @Test
-    @Transactional(timeout = 5)
-    @Rollback
+    @Transactional(propagation = Propagation.NEVER)
     public void testFail() throws Exception {
         assertThat(someRepository.count(), is(0L));
         assertThat(runFailingMethod(), is(true));

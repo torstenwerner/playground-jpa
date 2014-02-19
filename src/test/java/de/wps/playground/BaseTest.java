@@ -1,6 +1,7 @@
 package de.wps.playground;
 
 import com.mysema.query.jpa.JPASubQuery;
+import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.CollectionExpression;
 import com.mysema.query.types.Predicate;
 import org.junit.Test;
@@ -17,16 +18,12 @@ import static org.junit.Assert.*;
  * Created by torstenwerner on 18.02.14.
  */
 
-@TransactionConfiguration(defaultRollback = true)
 public class BaseTest extends AbstractTest {
     @Test
-    @Transactional(timeout = 5)
     public void testNothing() throws Exception {
     }
 
     @Test
-    @Transactional(timeout = 5)
-    @Rollback
     public void testSomeEntity() throws Exception {
         assertThat(someRepository.count(), is(0L));
         final SomeEntity entity = someService.createEntity();
@@ -35,8 +32,6 @@ public class BaseTest extends AbstractTest {
     }
 
     @Test
-    @Transactional(timeout = 5)
-    @Rollback
     public void testNested() throws Exception {
         assertThat(someRepository.count(), is(0L));
         final SomeEntity entity01 = new SomeEntity();
@@ -51,8 +46,6 @@ public class BaseTest extends AbstractTest {
     }
 
     @Test
-    @Transactional(timeout = 5)
-    @Rollback
     public void testRelated() throws Exception {
         assertThat(someRepository.count(), is(0L));
         final RelatedEntity relatedEntity = someService.createRelated("myfield");
