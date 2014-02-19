@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: hibernate-core-4.2.7.Final">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/4.2.7.Final/5505e04642b5ea3c9b59c18d4ef352e5b945ec99/hibernate-core-4.2.7.Final.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/4.2.7.Final/702509971821eb05f34a48adc78042e6ff19dc1d/hibernate-core-4.2.7.Final-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

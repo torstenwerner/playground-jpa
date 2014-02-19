@@ -14,8 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {ApplicationConfig.class})
-@Transactional(timeout = 5)
-@TransactionConfiguration(defaultRollback = true)
 public abstract class AbstractTest {
     @Autowired
     protected SomeRepository someRepository;
