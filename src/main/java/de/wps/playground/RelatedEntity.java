@@ -16,6 +16,8 @@ public class RelatedEntity {
     @JoinColumn(name = "other_id")
     private SomeEntity other;
 
+    public RelatedEntity() {}
+
     public RelatedEntity(SomeEntity other) {
         this.other = other;
     }
