@@ -1,9 +1,7 @@
 package de.wps.playground;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -39,8 +37,13 @@ public class SomeService {
     }
 
     @Transactional
-    public RelatedEntity createRelated(String field) {
+    public RelatedEntity saveRelated(RelatedEntity relatedEntity) {
+        return relatedRepository.findOne(relatedRepository.save(relatedEntity).getId());
+    }
+
+    @Transactional
+    public RelatedEntity createBoth(String field) {
         final SomeEntity someEntity = someRepository.save(new SomeEntity(field));
-        return relatedRepository.save(new RelatedEntity(someEntity));
+        return relatedRepository.findOne(relatedRepository.save(new RelatedEntity(someEntity)).getId());
     }
 }

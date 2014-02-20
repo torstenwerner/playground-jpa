@@ -1,7 +1,6 @@
 package de.wps.playground;
 
 import com.googlecode.flyway.core.Flyway;
-import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -27,12 +26,11 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 public class ApplicationConfig {
     private DataSource dataSource() {
-        final BasicDataSource ds = new BasicDataSource();
+        final DriverManagerDataSource ds = new DriverManagerDataSource();
         ds.setDriverClassName("org.hsqldb.jdbcDriver");
         ds.setUrl("jdbc:hsqldb:mem:playground");
         ds.setUsername("playground");
         ds.setPassword("");
-        ds.setDefaultAutoCommit(false);
 
         final Flyway flyway = new Flyway();
         flyway.setDataSource(ds);

@@ -1,13 +1,9 @@
 package de.wps.playground;
 
 import com.mysema.query.jpa.JPASubQuery;
-import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.CollectionExpression;
 import com.mysema.query.types.Predicate;
 import org.junit.Test;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -48,7 +44,7 @@ public class BaseTest extends AbstractTest {
     @Test
     public void testRelated() throws Exception {
         assertThat(someRepository.count(), is(0L));
-        final RelatedEntity relatedEntity = someService.createRelated("myfield");
+        final RelatedEntity relatedEntity = someService.createBoth("myfield");
         assertThat(relatedEntity.getOther().getField(), is("myfield"));
 
         final QSomeEntity qSomeEntity = QSomeEntity.someEntity;
@@ -61,5 +57,12 @@ public class BaseTest extends AbstractTest {
         final List<RelatedEntity> results = (List<RelatedEntity>) relatedRepository.findAll(isMyfield);
         assertThat(results, hasSize(1));
         assertThat(results.get(0).getOther().getField(), is("myfield"));
+    }
+
+    @Test
+    public void testRelatedOnly() throws Exception {
+        final SomeEntity someEntity = someRepository.save(new SomeEntity("myfield"));
+        final RelatedEntity relatedEntity = someService.saveRelated(new RelatedEntity(someEntity));
+        assertThat(relatedEntity.getOther(), notNullValue());
     }
 }

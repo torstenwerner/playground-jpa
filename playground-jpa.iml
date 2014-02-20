@@ -64,14 +64,12 @@
     <orderEntry type="library" exported="" name="Gradle: flyway-core-2.1.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: spring-context-3.2.3.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: spring-orm-3.2.3.RELEASE" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: commons-dbcp-1.4" level="project" />
     <orderEntry type="library" exported="" name="Gradle: spring-core-3.2.3.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: spring-beans-3.2.3.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: spring-tx-3.2.3.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: spring-jdbc-3.2.3.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: spring-expression-3.2.3.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: spring-aop-3.2.3.RELEASE" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: commons-pool-1.5.4" level="project" />
     <orderEntry type="library" exported="" name="Gradle: querydsl-jpa-3.2.4" level="project" />
     <orderEntry type="library" exported="" name="Gradle: guava-13.0.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: jsr305-1.3.9" level="project" />
