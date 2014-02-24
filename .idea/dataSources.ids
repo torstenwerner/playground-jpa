@@ -1085,27 +1085,34 @@
       <column name="ID" sqlType="INTEGER" length="32" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="TYPE_ID" sqlType="INTEGER" length="32" precision="0" nullable="false" jdbcType="4"/>
       <column name="BASE_FIELD" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <primary-key name="SYS_PK_10466" columns="ID"/>
-      <exported-key name="SYS_FK_10473" table="DERIVED" schema="PUBLIC" catalog="PUBLIC" columns="BASE_ID"/>
+      <primary-key name="SYS_PK_10924" columns="ID"/>
+      <foreign-key name="SYS_FK_10925" columns="TYPE_ID" ref-table="TYPE" ref-schema="PUBLIC" ref-catalog="PUBLIC" ref-columns="ID" update-rule="3" delete-rule="3"/>
+      <exported-key name="SYS_FK_10934" table="DERIVED" schema="PUBLIC" catalog="PUBLIC" columns="BASE_ID"/>
     </table>
     <table name="DERIVED" schema="PUBLIC" catalog="PUBLIC" type="TABLE">
       <column name="ID" sqlType="INTEGER" length="32" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="BASE_ID" sqlType="INTEGER" length="32" precision="0" nullable="false" jdbcType="4"/>
       <column name="DERIVED_FIELD" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <primary-key name="SYS_PK_10472" columns="ID"/>
-      <foreign-key name="SYS_FK_10473" columns="BASE_ID" ref-table="BASE" ref-schema="PUBLIC" ref-catalog="PUBLIC" ref-columns="ID" update-rule="3" delete-rule="3"/>
+      <primary-key name="SYS_PK_10933" columns="ID"/>
+      <foreign-key name="SYS_FK_10934" columns="BASE_ID" ref-table="BASE" ref-schema="PUBLIC" ref-catalog="PUBLIC" ref-columns="ID" update-rule="3" delete-rule="3"/>
     </table>
     <table name="RELATED" schema="PUBLIC" catalog="PUBLIC" type="TABLE">
       <column name="ID" sqlType="INTEGER" length="32" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="OTHER_ID" sqlType="INTEGER" length="32" precision="0" nullable="false" jdbcType="4"/>
-      <primary-key name="SYS_PK_10457" columns="ID"/>
-      <foreign-key name="SYS_FK_10458" columns="OTHER_ID" ref-table="SOMEENTITY" ref-schema="PUBLIC" ref-catalog="PUBLIC" ref-columns="ID" update-rule="3" delete-rule="3"/>
+      <primary-key name="SYS_PK_10909" columns="ID"/>
+      <foreign-key name="SYS_FK_10910" columns="OTHER_ID" ref-table="SOMEENTITY" ref-schema="PUBLIC" ref-catalog="PUBLIC" ref-columns="ID" update-rule="3" delete-rule="3"/>
     </table>
     <table name="SOMEENTITY" schema="PUBLIC" catalog="PUBLIC" type="TABLE">
       <column name="ID" sqlType="INTEGER" length="32" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="FIELD" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
-      <primary-key name="SYS_PK_10452" columns="ID"/>
-      <exported-key name="SYS_FK_10458" table="RELATED" schema="PUBLIC" catalog="PUBLIC" columns="OTHER_ID"/>
+      <primary-key name="SYS_PK_10904" columns="ID"/>
+      <exported-key name="SYS_FK_10910" table="RELATED" schema="PUBLIC" catalog="PUBLIC" columns="OTHER_ID"/>
+    </table>
+    <table name="TYPE" schema="PUBLIC" catalog="PUBLIC" type="TABLE">
+      <column name="ID" sqlType="INTEGER" length="32" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="NAME" sqlType="VARCHAR" length="255" precision="0" nullable="false" jdbcType="12"/>
+      <primary-key name="SYS_PK_10918" columns="ID"/>
+      <exported-key name="SYS_FK_10925" table="BASE" schema="PUBLIC" catalog="PUBLIC" columns="TYPE_ID"/>
     </table>
     <table name="BLOCKS" schema="SYSTEM_LOBS" catalog="PUBLIC" type="SYSTEM TABLE">
       <column name="BLOCK_ADDR" sqlType="INTEGER" length="32" precision="0" nullable="false" jdbcType="4"/>

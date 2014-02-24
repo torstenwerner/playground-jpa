@@ -10,21 +10,18 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "TYPE_ID", discriminatorType = DiscriminatorType.INTEGER)
 public class BaseEntity {
+    @Column(name = "TYPE_ID")
+    protected long typeId;
     @Id
     @GeneratedValue
     private Long id;
-
-    @Column(name = "TYPE_ID")
-    private long typeId;
-
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "TYPE_ID", insertable = false, updatable = false)
+    private TypeEntity type;
     @Column(name = "base_field")
     private String baseField;
-
-    public long getTypeId() {
-        return typeId;
-    }
-    public void setTypeId(long typeId) {
-        this.typeId = typeId;
+    public TypeEntity getType() {
+        return type;
     }
     public Long getId() {
         return id;

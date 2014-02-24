@@ -4,17 +4,19 @@ import com.mysema.query.types.expr.BooleanExpression;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by torstenwerner on 24.02.14.
- */
-
 public class DerivedTest extends BaseTest {
     @Autowired
     private DerivedRepository derivedRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Test
     public void testCreate() throws Exception {
@@ -22,17 +24,22 @@ public class DerivedTest extends BaseTest {
         entity01.setBaseField("basefield");
         entity01.setDerivedField("derivedfield");
         derivedRepository.save(entity01);
+        entityManager.clear();
         assertThat(entity01.getId(), notNullValue());
 
+        final DerivedEntity entity02 = derivedRepository.findOne(entity01.getId());
+        assertThat(entity02.getType().getName(), is("DERIVED"));
+
         assertThat(derivedRepository.count(), is(1L));
-        final DerivedEntity entity02 = derivedRepository.findAll().iterator().next();
-        assertThat(entity02.getDerivedField(), is("derivedfield"));
-        assertThat(entity02.getBaseField(), is("basefield"));
+        final DerivedEntity entity03 = derivedRepository.findAll().iterator().next();
+        assertThat(entity03.getDerivedField(), is("derivedfield"));
+        assertThat(entity03.getBaseField(), is("basefield"));
+        assertThat(entity03.getType().getName(), is("DERIVED"));
 
         final QDerivedEntity qDerivedEntity = QDerivedEntity.derivedEntity;
         final BooleanExpression isMatching = qDerivedEntity.derivedField.eq("derivedfield");
         assertThat(derivedRepository.count(isMatching), is(1L));
-        final DerivedEntity entity03 = derivedRepository.findAll(isMatching).iterator().next();
-        assertThat(entity03.getBaseField(), is("basefield"));
+        final DerivedEntity entity04 = derivedRepository.findAll(isMatching).iterator().next();
+        assertThat(entity04.getBaseField(), is("basefield"));
     }
 }
