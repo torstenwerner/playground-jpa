@@ -37,9 +37,14 @@ public class DerivedTest extends BaseTest {
         assertThat(entity03.getType().getName(), is("DERIVED"));
 
         final QDerivedEntity qDerivedEntity = QDerivedEntity.derivedEntity;
-        final BooleanExpression isMatching = qDerivedEntity.derivedField.eq("derivedfield");
-        assertThat(derivedRepository.count(isMatching), is(1L));
-        final DerivedEntity entity04 = derivedRepository.findAll(isMatching).iterator().next();
+        final BooleanExpression isMatching01 = qDerivedEntity.derivedField.eq("derivedfield");
+        assertThat(derivedRepository.count(isMatching01), is(1L));
+        final DerivedEntity entity04 = derivedRepository.findAll(isMatching01).iterator().next();
         assertThat(entity04.getBaseField(), is("basefield"));
+
+        final BooleanExpression isMatching02 = qDerivedEntity.type.name.eq("DERIVED");
+        assertThat(derivedRepository.count(isMatching02), is(1L));
+        final DerivedEntity entity05 = derivedRepository.findAll(isMatching02).iterator().next();
+        assertThat(entity05.getBaseField(), is("basefield"));
     }
 }
