@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static de.wps.playground.SomeEntity.Type;
+
 /**
  * Created by torstenwerner on 18.02.14.
  */
@@ -19,6 +21,8 @@ public class SomeService {
     @Transactional
     public SomeEntity createEntity() {
         final SomeEntity entity = new SomeEntity();
+        entity.setType(Type.valueOf("YEAR"));
+        entity.setField("Ernie");
         return someRepository.save(entity);
     }
 

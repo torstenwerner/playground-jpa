@@ -7,8 +7,9 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static de.wps.playground.SomeEntity.Type.YEAR;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * Created by torstenwerner on 18.02.14.
@@ -24,6 +25,10 @@ public class BaseTest extends AbstractTest {
         assertThat(someRepository.count(), is(0L));
         final SomeEntity entity = someService.createEntity();
         assertThat(entity.getId(), notNullValue());
+        assertThat(entity.getType(), is(YEAR));
+        assertThat(entity.getType().ordinal(), is(4));
+        assertThat(entity.getType().name(), is("YEAR"));
+        assertThat(entity.getField(), is("Ernie"));
         assertThat(someRepository.count(), is(1L));
     }
 

@@ -1,2 +1,4 @@
-db
-logs
+/.gradle/
+/.idea/libraries/
+/db/
+/logs/
