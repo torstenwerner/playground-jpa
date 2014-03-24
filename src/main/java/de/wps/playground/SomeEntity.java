@@ -2,10 +2,6 @@ package de.wps.playground;
 
 import javax.persistence.*;
 
-/**
- * Created by torstenwerner on 18.02.14.
- */
-
 @Entity
 public class SomeEntity {
     @Id
@@ -50,5 +46,13 @@ public class SomeEntity {
 
     public enum Type {
         IMMEDIATE, MONTH, QUARTER, HALFYEAR, YEAR;
+    }
+
+    @PrePersist
+    @PreUpdate
+    private void checkConstraint() {
+        if ("INVALID".equals(field)) {
+            throw new RuntimeException("field is invalid");
+        }
     }
 }

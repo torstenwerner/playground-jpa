@@ -71,4 +71,16 @@ public class BaseTest extends AbstractTest {
         assertThat(relatedEntity.getOther(), notNullValue());
         assertThat(relatedEntity.getOther().getField(), is("myfield"));
     }
+
+    @Test(expected = RuntimeException.class)
+    public void testInvalidInsert() throws Exception {
+        someRepository.saveAndFlush(new SomeEntity("INVALID"));
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void testInvalidUpdate() throws Exception {
+        final SomeEntity someEntity = someRepository.save(new SomeEntity("myfield"));
+        someEntity.setField("INVALID");
+        someRepository.saveAndFlush(someEntity);
+    }
 }
