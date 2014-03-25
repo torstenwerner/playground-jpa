@@ -23,8 +23,7 @@ public class DerivedTest extends BaseTest {
         final DerivedEntity entity01 = new DerivedEntity();
         entity01.setBaseField("basefield");
         entity01.setDerivedField("derivedfield");
-        derivedRepository.saveAndFlush(entity01);
-        entityManager.refresh(entity01);
+        derivedRepository.saveAndRefresh(entity01);
         assertThat(entity01.getId(), notNullValue());
 
         final DerivedEntity entity02 = derivedRepository.findOne(entity01.getId());
