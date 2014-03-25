@@ -1,4 +1,5 @@
 /.gradle/
 /.idea/libraries/
+/build/
 /db/
 /logs/
