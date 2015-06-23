@@ -1,6 +1,8 @@
 package de.wps.playground;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class SomeEntity {
@@ -12,6 +14,9 @@ public class SomeEntity {
     @Column
     @Enumerated(EnumType.STRING)
     private Type type;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "RELATED")
+    private List<ThirdEntity> thirds = new ArrayList<ThirdEntity>();
 
     public SomeEntity() {
     }
@@ -42,6 +47,10 @@ public class SomeEntity {
 
     public void setField(String field) {
         this.field = field;
+    }
+
+    public List<ThirdEntity> getThirds() {
+        return thirds;
     }
 
     public enum Type {

@@ -3,22 +3,27 @@ package de.wps.playground;
 import com.mysema.query.jpa.JPASubQuery;
 import com.mysema.query.types.CollectionExpression;
 import com.mysema.query.types.Predicate;
+import com.mysema.query.types.expr.BooleanExpression;
 import org.junit.Test;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.Collections;
 import java.util.List;
 
 import static de.wps.playground.SomeEntity.Type.YEAR;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by torstenwerner on 18.02.14.
- */
-
 public class BaseTest extends AbstractTest {
     @Test
     public void testNothing() throws Exception {
     }
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Test
     public void testSomeEntity() throws Exception {
@@ -71,6 +76,21 @@ public class BaseTest extends AbstractTest {
         final RelatedEntity relatedEntity = someService.saveRelated(new RelatedEntity(someEntity, thirdEntity));
         assertThat(relatedEntity.getOther(), notNullValue());
         assertThat(relatedEntity.getOther().getField(), is("myfield"));
+    }
+
+    @Test
+    public void testManyToMany() throws Exception {
+        final SomeEntity someEntity = new SomeEntity("myfield");
+        final ThirdEntity thirdEntity = new ThirdEntity("myname");
+        //someEntity.getThirds().add(thirdEntity);
+        someRepository.save(someEntity);
+        //assertThat(someEntity.getThirds(), hasSize(1));
+
+        entityManager.flush();
+        //entityManager.clear();
+        BooleanExpression expr = QSomeEntity.someEntity.field.eq("myfield");
+        Page<SomeEntity> entities = someRepository.findAll(new PageRequest(0, 100));
+        assertThat(entities.getNumber(), is(1));
     }
 
     @Test(expected = RuntimeException.class)
