@@ -2,10 +2,6 @@ package de.wps.playground;
 
 import javax.persistence.*;
 
-/**
- * Created by torstenwerner on 19.02.14.
- */
-
 @Entity(name = "related")
 public class RelatedEntity {
     @Id
@@ -16,10 +12,15 @@ public class RelatedEntity {
     @JoinColumn(name = "other_id")
     private SomeEntity other;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "third_id")
+    private ThirdEntity third;
+
     public RelatedEntity() {}
 
-    public RelatedEntity(SomeEntity other) {
+    public RelatedEntity(SomeEntity other, ThirdEntity third) {
         this.other = other;
+        this.third = third;
     }
 
     public SomeEntity getOther() {
@@ -33,5 +34,13 @@ public class RelatedEntity {
     }
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public ThirdEntity getThird() {
+        return third;
+    }
+
+    public void setThird(ThirdEntity third) {
+        this.third = third;
     }
 }

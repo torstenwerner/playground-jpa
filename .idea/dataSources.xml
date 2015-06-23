@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="776511279">
+  <component name="DataSourceManagerImpl" format="xml" hash="1860615942">
     <data-source source="LOCAL" name="HSQLDB - dev" uuid="143decf6-01d6-414f-809b-d0380886d19d">
       <driver-ref>hsqldb.embedded</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.hsqldb.jdbc.JDBCDriver</jdbc-driver>
       <jdbc-url>jdbc:hsqldb:file:$PROJECT_DIR$/db/jpa?user=playground</jdbc-url>
-      <schema-pattern>PUBLIC.PUBLIC</schema-pattern>
-      <default-schemas>PUBLIC.*</default-schemas>
       <libraries />
     </data-source>
   </component>
 </project>
-

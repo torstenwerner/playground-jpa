@@ -6,10 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static de.wps.playground.SomeEntity.Type;
 
-/**
- * Created by torstenwerner on 18.02.14.
- */
-
 @Service
 public class SomeService {
     @Autowired
@@ -48,6 +44,7 @@ public class SomeService {
     @Transactional
     public RelatedEntity createBoth(String field) {
         final SomeEntity someEntity = someRepository.save(new SomeEntity(field));
-        return relatedRepository.findOne(relatedRepository.save(new RelatedEntity(someEntity)).getId());
+        final ThirdEntity thirdEntity = new ThirdEntity("myname");
+        return relatedRepository.findOne(relatedRepository.save(new RelatedEntity(someEntity, thirdEntity)).getId());
     }
 }

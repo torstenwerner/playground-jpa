@@ -1,5 +1,7 @@
 /.gradle/
-/.idea/libraries/
+/.idea/
 /build/
 /db/
 /logs/
+/src/main/generated/
+/playground-jpa.iml

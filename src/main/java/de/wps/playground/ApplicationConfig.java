@@ -16,10 +16,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-/**
- * Created by torstenwerner on 18.02.14.
- */
-
 @Configuration
 @ComponentScan(value = "de.wps.playground")
 @EnableJpaRepositories("de.wps.playground")

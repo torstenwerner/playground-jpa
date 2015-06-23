@@ -4,9 +4,6 @@ import com.mysema.query.types.expr.BooleanExpression;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
@@ -14,9 +11,6 @@ import static org.junit.Assert.assertThat;
 public class DerivedTest extends BaseTest {
     @Autowired
     private DerivedRepository derivedRepository;
-
-    @PersistenceContext
-    private EntityManager entityManager;
 
     @Test
     public void testCreate() throws Exception {

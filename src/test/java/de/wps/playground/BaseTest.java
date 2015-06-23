@@ -67,7 +67,8 @@ public class BaseTest extends AbstractTest {
     @Test
     public void testRelatedOnly() throws Exception {
         final SomeEntity someEntity = someRepository.save(new SomeEntity("myfield"));
-        final RelatedEntity relatedEntity = someService.saveRelated(new RelatedEntity(someEntity));
+        final ThirdEntity thirdEntity = new ThirdEntity("myname");
+        final RelatedEntity relatedEntity = someService.saveRelated(new RelatedEntity(someEntity, thirdEntity));
         assertThat(relatedEntity.getOther(), notNullValue());
         assertThat(relatedEntity.getOther().getField(), is("myfield"));
     }
