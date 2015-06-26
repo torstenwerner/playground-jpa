@@ -9,7 +9,7 @@ public class RelatedEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "other_id")
+    @JoinColumn(name = "some_id")
     private SomeEntity other;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

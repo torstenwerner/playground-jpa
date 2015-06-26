@@ -16,6 +16,9 @@ public abstract class AbstractTest {
     protected SomeRepository someRepository;
 
     @Autowired
+    protected ThirdRepository thirdRepository;
+
+    @Autowired
     protected RelatedRepository relatedRepository;
 
     @Autowired

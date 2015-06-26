@@ -10,7 +10,6 @@ import org.springframework.data.domain.PageRequest;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Collections;
 import java.util.List;
 
 import static de.wps.playground.SomeEntity.Type.YEAR;
@@ -80,17 +79,30 @@ public class BaseTest extends AbstractTest {
 
     @Test
     public void testManyToMany() throws Exception {
-        final SomeEntity someEntity = new SomeEntity("myfield");
-        final ThirdEntity thirdEntity = new ThirdEntity("myname");
-        //someEntity.getThirds().add(thirdEntity);
-        someRepository.save(someEntity);
-        //assertThat(someEntity.getThirds(), hasSize(1));
+        ThirdEntity thirdEntity = new ThirdEntity("myname");
 
-        entityManager.flush();
-        //entityManager.clear();
-        BooleanExpression expr = QSomeEntity.someEntity.field.eq("myfield");
-        Page<SomeEntity> entities = someRepository.findAll(new PageRequest(0, 100));
-        assertThat(entities.getNumber(), is(1));
+        final SomeEntity someEntity = new SomeEntity("myfield");
+        someEntity.getThirds().add(thirdEntity);
+        someRepository.save(someEntity);
+        assertThat(someEntity.getId(), notNullValue());
+        assertThat(someEntity.getThirds(), hasSize(1));
+        assertThat(someEntity.getField(), is("myfield"));
+
+        assertThat(someRepository.findOne(someEntity.getId()), notNullValue());
+        assertThat(someRepository.findAll(), hasSize(1));
+
+        BooleanExpression expr1 = QSomeEntity.someEntity.thirds.any().name.eq("myname");
+        Page<SomeEntity> entities1 = someRepository.findAll(expr1, new PageRequest(0, 100));
+        assertThat(entities1.getNumberOfElements(), is(1));
+        assertThat(entities1.getContent().get(0).getField(), is("myfield"));
+
+        BooleanExpression expr2 = QThirdEntity.thirdEntity.somes.any().field.eq("myfield");
+        Page<ThirdEntity> entities2 = thirdRepository.findAll(expr2, new PageRequest(0, 100));
+        assertThat(entities2.getNumberOfElements(), is(1));
+
+        BooleanExpression expr3 = QSomeEntity.someEntity.thirds.any().somes.any().field.eq("myfield");
+        Page<SomeEntity> entities3 = someRepository.findAll(expr3, new PageRequest(0, 100));
+        assertThat(entities3.getNumberOfElements(), is(1));
     }
 
     @Test(expected = RuntimeException.class)

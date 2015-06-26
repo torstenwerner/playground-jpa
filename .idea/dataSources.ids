@@ -10,42 +10,42 @@
       <column name="ID" sqlType="INTEGER" precision="32" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="TYPE_ID" sqlType="INTEGER" precision="32" scale="0" nullable="false" jdbcType="4"/>
       <column name="BASE_FIELD" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <primary-key name="SYS_PK_10373" columns="ID"/>
-      <foreign-key name="SYS_FK_10374" columns="TYPE_ID" ref-table="TYPE" ref-schema="PUBLIC" ref-catalog="PUBLIC" ref-columns="ID" update-rule="3" delete-rule="3"/>
-      <exported-key name="SYS_FK_10382" table="DERIVED" schema="PUBLIC" catalog="PUBLIC" columns="BASE_ID"/>
+      <primary-key name="SYS_PK_10107" columns="ID"/>
+      <foreign-key name="SYS_FK_10108" columns="TYPE_ID" ref-table="TYPE" ref-schema="PUBLIC" ref-catalog="PUBLIC" ref-columns="ID" update-rule="3" delete-rule="3"/>
+      <exported-key name="SYS_FK_10116" table="DERIVED" schema="PUBLIC" catalog="PUBLIC" columns="BASE_ID"/>
     </table>
     <table name="DERIVED" schema="PUBLIC" catalog="PUBLIC" type="TABLE">
       <column name="BASE_ID" sqlType="INTEGER" precision="32" scale="0" nullable="false" jdbcType="4"/>
       <column name="DERIVED_FIELD" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <primary-key name="SYS_PK_10381" columns="BASE_ID"/>
-      <foreign-key name="SYS_FK_10382" columns="BASE_ID" ref-table="BASE" ref-schema="PUBLIC" ref-catalog="PUBLIC" ref-columns="ID" update-rule="3" delete-rule="3"/>
+      <primary-key name="SYS_PK_10115" columns="BASE_ID"/>
+      <foreign-key name="SYS_FK_10116" columns="BASE_ID" ref-table="BASE" ref-schema="PUBLIC" ref-catalog="PUBLIC" ref-columns="ID" update-rule="3" delete-rule="3"/>
     </table>
     <table name="RELATED" schema="PUBLIC" catalog="PUBLIC" type="TABLE">
       <column name="ID" sqlType="INTEGER" precision="32" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="OTHER_ID" sqlType="INTEGER" precision="32" scale="0" nullable="false" jdbcType="4"/>
+      <column name="SOME_ID" sqlType="INTEGER" precision="32" scale="0" nullable="false" jdbcType="4"/>
       <column name="THIRD_ID" sqlType="INTEGER" precision="32" scale="0" nullable="false" jdbcType="4"/>
-      <primary-key name="SYS_PK_10354" columns="ID"/>
-      <foreign-key name="SYS_FK_10355" columns="OTHER_ID" ref-table="SOMEENTITY" ref-schema="PUBLIC" ref-catalog="PUBLIC" ref-columns="ID" update-rule="3" delete-rule="3"/>
-      <foreign-key name="SYS_FK_10356" columns="THIRD_ID" ref-table="THIRDENTITY" ref-schema="PUBLIC" ref-catalog="PUBLIC" ref-columns="ID" update-rule="3" delete-rule="3"/>
+      <primary-key name="SYS_PK_10129" columns="ID"/>
+      <foreign-key name="SYS_FK_10130" columns="SOME_ID" ref-table="SOMEENTITY" ref-schema="PUBLIC" ref-catalog="PUBLIC" ref-columns="ID" update-rule="3" delete-rule="3"/>
+      <foreign-key name="SYS_FK_10131" columns="THIRD_ID" ref-table="THIRDENTITY" ref-schema="PUBLIC" ref-catalog="PUBLIC" ref-columns="ID" update-rule="3" delete-rule="3"/>
     </table>
     <table name="SOMEENTITY" schema="PUBLIC" catalog="PUBLIC" type="TABLE">
       <column name="ID" sqlType="INTEGER" precision="32" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="FIELD" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="TYPE" sqlType="VARCHAR" precision="16" scale="0" nullable="true" jdbcType="12"/>
-      <primary-key name="SYS_PK_10344" columns="ID"/>
-      <exported-key name="SYS_FK_10355" table="RELATED" schema="PUBLIC" catalog="PUBLIC" columns="OTHER_ID"/>
+      <primary-key name="SYS_PK_10092" columns="ID"/>
+      <exported-key name="SYS_FK_10130" table="RELATED" schema="PUBLIC" catalog="PUBLIC" columns="SOME_ID"/>
     </table>
     <table name="THIRDENTITY" schema="PUBLIC" catalog="PUBLIC" type="TABLE">
       <column name="ID" sqlType="INTEGER" precision="32" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="NAME" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <primary-key name="SYS_PK_10348" columns="ID"/>
-      <exported-key name="SYS_FK_10356" table="RELATED" schema="PUBLIC" catalog="PUBLIC" columns="THIRD_ID"/>
+      <primary-key name="SYS_PK_10096" columns="ID"/>
+      <exported-key name="SYS_FK_10131" table="RELATED" schema="PUBLIC" catalog="PUBLIC" columns="THIRD_ID"/>
     </table>
     <table name="TYPE" schema="PUBLIC" catalog="PUBLIC" type="TABLE">
       <column name="ID" sqlType="INTEGER" precision="32" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="NAME" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
-      <primary-key name="SYS_PK_10367" columns="ID"/>
-      <exported-key name="SYS_FK_10374" table="BASE" schema="PUBLIC" catalog="PUBLIC" columns="TYPE_ID"/>
+      <primary-key name="SYS_PK_10101" columns="ID"/>
+      <exported-key name="SYS_FK_10108" table="BASE" schema="PUBLIC" catalog="PUBLIC" columns="TYPE_ID"/>
     </table>
   </data-source>
 </component>

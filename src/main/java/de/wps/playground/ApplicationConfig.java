@@ -41,7 +41,7 @@ public class ApplicationConfig {
     @Bean
     public EntityManagerFactory entityManagerFactory() {
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        // vendorAdapter.setShowSql(true);
+        vendorAdapter.setShowSql(true);
 
         final LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);

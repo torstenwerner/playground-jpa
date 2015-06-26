@@ -5,5 +5,5 @@ import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SomeRepository extends JpaRepository<SomeEntity, Long>, QueryDslPredicateExecutor<SomeEntity> {
+public interface ThirdRepository extends JpaRepository<ThirdEntity, Long>, QueryDslPredicateExecutor<ThirdEntity> {
 }

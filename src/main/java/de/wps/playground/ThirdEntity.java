@@ -1,6 +1,8 @@
 package de.wps.playground;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class ThirdEntity {
@@ -9,6 +11,8 @@ public class ThirdEntity {
     private Long id;
     @Column
     private String name;
+    @ManyToMany(mappedBy = "thirds")
+    private List<SomeEntity> somes = new ArrayList<>();
 
     public ThirdEntity() {
     }

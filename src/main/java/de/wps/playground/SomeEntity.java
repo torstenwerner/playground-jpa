@@ -15,8 +15,10 @@ public class SomeEntity {
     @Enumerated(EnumType.STRING)
     private Type type;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "RELATED")
-    private List<ThirdEntity> thirds = new ArrayList<ThirdEntity>();
+    @JoinTable(name = "RELATED",
+            joinColumns = { @JoinColumn(name = "SOME_ID") },
+            inverseJoinColumns = { @JoinColumn(name = "THIRD_ID")} )
+    private List<ThirdEntity> thirds = new ArrayList<>();
 
     public SomeEntity() {
     }
