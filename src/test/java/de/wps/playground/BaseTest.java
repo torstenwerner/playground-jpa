@@ -100,8 +100,7 @@ public class BaseTest extends AbstractTest {
         Page<ThirdEntity> entities2 = thirdRepository.findAll(expr2, new PageRequest(0, 100));
         assertThat(entities2.getNumberOfElements(), is(1));
 
-        BooleanExpression expr3 = QSomeEntity.someEntity.thirds.any().somes.any().field.eq("myfield");
-        Page<SomeEntity> entities3 = someRepository.findAll(expr3, new PageRequest(0, 100));
+        Page<SomeEntity> entities3 = someRepository.findAllManyMany("myfield", new PageRequest(0, 100));
         assertThat(entities3.getNumberOfElements(), is(1));
     }
 

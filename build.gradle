@@ -13,7 +13,7 @@ configurations {
     querydslapt
 }
 
-def spring_jpa_version = '1.5.1.RELEASE'
+def spring_jpa_version = '1.8.0.RELEASE'
 def spring_framework_version = '4.0.2.RELEASE'
 def querydsl_version = '3.2.4'
 
