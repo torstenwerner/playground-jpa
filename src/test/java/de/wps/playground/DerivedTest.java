@@ -1,6 +1,6 @@
 package de.wps.playground;
 
-import com.mysema.query.types.expr.BooleanExpression;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

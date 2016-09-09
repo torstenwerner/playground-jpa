@@ -1,9 +1,9 @@
 package de.wps.playground;
 
-import com.mysema.query.jpa.JPASubQuery;
-import com.mysema.query.types.CollectionExpression;
-import com.mysema.query.types.Predicate;
-import com.mysema.query.types.expr.BooleanExpression;
+import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.JPAExpressions;
+import com.querydsl.jpa.JPQLQuery;
 import org.junit.Test;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -57,8 +57,8 @@ public class BaseTest extends AbstractTest {
         assertThat(relatedEntity.getOther().getField(), is("myfield"));
 
         final QSomeEntity qSomeEntity = QSomeEntity.someEntity;
-        final CollectionExpression myfields = new JPASubQuery().from(qSomeEntity).
-                where(qSomeEntity.field.eq("myfield")).list();
+        final JPQLQuery<SomeEntity> myfields = JPAExpressions.selectFrom(qSomeEntity).
+                where(qSomeEntity.field.eq("myfield"));
 
         final QRelatedEntity qRelatedEntity = QRelatedEntity.relatedEntity;
         Predicate isMyfield = qRelatedEntity.other.in(myfields);
