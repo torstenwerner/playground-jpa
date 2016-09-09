@@ -52,3 +52,8 @@ task generateQueryDSL(type: JavaCompile, group: 'build', description: 'Generates
 
 compileJava.dependsOn generateQueryDSL
 clean.dependsOn cleanGenerateQueryDSL
+
+wrapper {
+    gradleVersion = '3.0'
+}
+
