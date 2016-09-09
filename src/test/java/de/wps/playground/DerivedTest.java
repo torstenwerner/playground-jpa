@@ -1,8 +1,14 @@
 package de.wps.playground;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
+import org.hibernate.SessionFactory;
+import org.hibernate.stat.Statistics;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
+import java.util.Arrays;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -11,9 +17,19 @@ import static org.junit.Assert.assertThat;
 public class DerivedTest extends BaseTest {
     @Autowired
     private DerivedRepository derivedRepository;
+    private Statistics statistics;
+
+    @PersistenceUnit
+    private void init(EntityManagerFactory entityManagerFactory) {
+        final SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
+        statistics = sessionFactory.getStatistics();
+        statistics.setStatisticsEnabled(true);
+    }
 
     @Test
     public void testCreate() throws Exception {
+        statistics.clear();
+
         final DerivedEntity entity01 = new DerivedEntity();
         entity01.setBaseField("basefield");
         entity01.setDerivedField("derivedfield");
@@ -39,5 +55,8 @@ public class DerivedTest extends BaseTest {
         assertThat(derivedRepository.count(isMatching02), is(1L));
         final DerivedEntity entity05 = derivedRepository.findAll(isMatching02).iterator().next();
         assertThat(entity05.getBaseField(), is("basefield"));
+
+        System.out.println(statistics);
+        System.out.println(Arrays.toString(statistics.getQueries()));
     }
 }

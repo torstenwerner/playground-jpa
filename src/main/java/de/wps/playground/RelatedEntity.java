@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity(name = "related")
 public class RelatedEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -16,7 +16,8 @@ public class RelatedEntity {
     @JoinColumn(name = "third_id")
     private ThirdEntity third;
 
-    public RelatedEntity() {}
+    public RelatedEntity() {
+    }
 
     public RelatedEntity(SomeEntity other, ThirdEntity third) {
         this.other = other;
@@ -26,12 +27,15 @@ public class RelatedEntity {
     public SomeEntity getOther() {
         return other;
     }
+
     public void setOther(SomeEntity other) {
         this.other = other;
     }
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }

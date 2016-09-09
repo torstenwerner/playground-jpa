@@ -7,17 +7,20 @@ import java.util.List;
 @Entity
 public class SomeEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column
     private String field;
+
     @Column
     @Enumerated(EnumType.STRING)
     private Type type;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "RELATED",
-            joinColumns = { @JoinColumn(name = "SOME_ID") },
-            inverseJoinColumns = { @JoinColumn(name = "THIRD_ID")} )
+            joinColumns = {@JoinColumn(name = "SOME_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "THIRD_ID")})
     private List<ThirdEntity> thirds = new ArrayList<>();
 
     public SomeEntity() {

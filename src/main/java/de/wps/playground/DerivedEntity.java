@@ -7,18 +7,18 @@ import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity(name = "derived")
 @DiscriminatorValue("1")
-@PrimaryKeyJoinColumn(name = "BASE_ID")
+@PrimaryKeyJoinColumn(name = "base_id")
 public class DerivedEntity extends BaseEntity {
     @Column(name = "derived_field")
     private String derivedField;
 
     public DerivedEntity() {
-        typeId = 1;
     }
 
     public String getDerivedField() {
         return derivedField;
     }
+
     public void setDerivedField(String derivedField) {
         this.derivedField = derivedField;
     }

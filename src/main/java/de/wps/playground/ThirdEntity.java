@@ -7,10 +7,12 @@ import java.util.List;
 @Entity
 public class ThirdEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column
     private String name;
+
     @ManyToMany(mappedBy = "thirds")
     private List<SomeEntity> somes = new ArrayList<>();
 

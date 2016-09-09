@@ -1,12 +1,11 @@
 package de.wps.playground;
 
-import com.googlecode.flyway.core.Flyway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate3.HibernateExceptionTranslator;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -22,20 +21,12 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 public class ApplicationConfig {
     private DataSource dataSource() {
-        final DriverManagerDataSource ds = new DriverManagerDataSource();
-        ds.setDriverClassName("org.hsqldb.jdbcDriver");
-        ds.setUrl("jdbc:hsqldb:mem:playground");
-        ds.setUsername("playground");
-        ds.setPassword("");
+        final EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
 
-        final Flyway flyway = new Flyway();
-        flyway.setDataSource(ds);
-        flyway.setInitOnMigrate(true);
-        flyway.clean();
-        flyway.setLocations("/db/migration");
-        flyway.migrate();
-
-        return ds;
+        return builder
+                .setType(EmbeddedDatabaseType.HSQL)
+                .addScript("/db/migration/V1__initial.sql")
+                .build();
     }
 
     @Bean
@@ -57,10 +48,5 @@ public class ApplicationConfig {
         final JpaTransactionManager txManager = new JpaTransactionManager();
         txManager.setEntityManagerFactory(entityManagerFactory());
         return txManager;
-    }
-
-    @Bean
-    HibernateExceptionTranslator hibernateExceptionTranslator() {
-        return new HibernateExceptionTranslator();
     }
 }
