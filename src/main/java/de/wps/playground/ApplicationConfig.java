@@ -4,6 +4,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
@@ -22,12 +23,9 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public EntityManagerFactory entityManagerFactory() {
-        final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setShowSql(true);
-
+    public EntityManagerFactory entityManagerFactory(JpaVendorAdapter jpaVendorAdapter) {
         final LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-        factory.setJpaVendorAdapter(vendorAdapter);
+        factory.setJpaVendorAdapter(jpaVendorAdapter);
         factory.setPackagesToScan("de.wps.playground");
         factory.setDataSource(dataSource());
         factory.afterPropertiesSet();
