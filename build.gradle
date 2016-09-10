@@ -59,6 +59,10 @@ bootRepackage {
     enabled = false
 }
 
+test.testLogging.lifecycle {
+    events 'skipped', 'passed', 'failed'
+}
+
 wrapper {
     gradleVersion = '3.0'
 }
