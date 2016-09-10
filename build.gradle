@@ -13,8 +13,6 @@ apply plugin: 'spring-boot'
 sourceCompatibility = 1.8
 version = '1.0'
 
-sourceSets.main.java.srcDir 'src/main/generated'
-
 repositories {
     jcenter()
 }
@@ -41,6 +39,9 @@ dependencies {
     testRuntime 'org.hsqldb:hsqldb:2.3.3:jdk6debug'
 }
 
+def queryDslSources = "$buildDir/src/querydsl/java"
+sourceSets.main.java.srcDir queryDslSources
+
 task generateQueryDSL(type: JavaCompile, group: 'build', description: 'Generates the QueryDSL query types') {
     source = sourceSets.main.java
     classpath = configurations.compile + configurations.querydslapt
@@ -48,7 +49,7 @@ task generateQueryDSL(type: JavaCompile, group: 'build', description: 'Generates
             "-proc:only",
             "-processor", "com.querydsl.apt.jpa.JPAAnnotationProcessor"
     ]
-    destinationDir = file('src/main/generated')
+    destinationDir = file(queryDslSources)
 }
 
 compileJava.dependsOn generateQueryDSL
