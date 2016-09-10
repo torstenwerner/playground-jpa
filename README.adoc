@@ -3,6 +3,12 @@
 - uses gradle
 - mostly junit tests
 
+[source]
 ----
 ./gradlew build
 ----
+
+== Continuous Integration thanks to Snap CI
+
+Build image:https://snap-ci.com/torstenwerner/playground-jpa/branch/master/build_image[status]
+at link:https://snap-ci.com/torstenwerner/playground-jpa/branch/master[Snap CI]
