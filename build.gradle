@@ -31,9 +31,15 @@ dependencies {
             'org.springframework.boot:spring-boot-starter-data-jpa',
             "com.querydsl:querydsl-jpa:$querydsl_version"
 
+    runtime 'org.flywaydb:flyway-core'
+
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 
-    testRuntime 'org.hsqldb:hsqldb:2.3.4:jdk6debug'
+    // hsql version 2.3.4 breaks flyway migrations
+    // https://sourceforge.net/p/hsqldb/bugs/1441/
+    // https://github.com/flyway/flyway/issues/1346
+    // https://github.com/spring-projects/spring-boot/issues/6394
+    testRuntime 'org.hsqldb:hsqldb:2.3.3:jdk6debug'
 }
 
 task generateQueryDSL(type: JavaCompile, group: 'build', description: 'Generates the QueryDSL query types') {
