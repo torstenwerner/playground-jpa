@@ -1,0 +1,8 @@
+= Playground jpa, spring-data-jpa, querydsl-jpa, and hibernate
+
+- uses gradle
+- mostly junit tests
+
+----
+./gradlew build
+----
