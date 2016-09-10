@@ -13,7 +13,8 @@ import javax.sql.DataSource;
 
 @SpringBootApplication
 public class ApplicationConfig {
-    private DataSource dataSource() {
+    @Bean
+    public DataSource dataSource() {
         final EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
 
         return builder
