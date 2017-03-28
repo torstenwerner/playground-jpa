@@ -59,8 +59,11 @@ bootRepackage {
     enabled = false
 }
 
-test.testLogging.lifecycle {
-    events 'skipped', 'passed', 'failed'
+test.testLogging {
+    showStandardStreams = true
+    lifecycle {
+        events 'skipped', 'passed', 'failed'
+    }
 }
 
 wrapper {
